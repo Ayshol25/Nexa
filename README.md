@@ -7,7 +7,7 @@
 - **Member 1:** Aysha - Ilahia College of Engineering
 
 ### Hosted Project Link
-[Add your hosted project link here]
+https://nexa-ayshol25s-projects.vercel.app/
 
 ### Project Description
 A college advising platform that helps students find the best colleges based on their interests, courses, location preference, and vibe. It also offers an aptitude test to guide students unsure about their career path.
