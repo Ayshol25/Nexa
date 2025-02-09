@@ -1,99 +1,61 @@
-# [Project Name] 🎯
-
+# College Advisor \U0001F3AF
 
 ## Basic Details
-### Team Name: [Name]
-
+### Team Name: Nexa
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- **Member 1:** Aysha - Ilahia College of Engineering
 
 ### Hosted Project Link
-[mention your project hosted project link here]
+[Add your hosted project link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+A college advising platform that helps students find the best colleges based on their interests, courses, location preference, and vibe. It also offers an aptitude test to guide students unsure about their career path.
 
-### The Problem statement
-[What ridiculous problem are you solving?]
+### The Problem Statement
+Choosing a college is stressful and confusing! Students struggle to find the best-fit college based on their interests, career goals, and preferences.
 
 ### The Solution
-[How are you solving it? Keep it fun!]
+We built an AI-powered platform that recommends colleges, programs, and career paths based on user inputs and an aptitude test—like a Tinder for Colleges! \U0001F393\U0001F525
 
 ## Technical Details
 ### Technologies/Components Used
-For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+#### For Software:
+- **Languages:** HTML, CSS, JavaScript
+- **Frameworks:** React.js
+- **Libraries:** Firebase Authentication, Firestore Database, Bootstrap
+- **Tools:** Firebase, GitHub, Netlify/Vercel for hosting
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+#### For Hardware:
+*(Not applicable, but can be updated if needed)*
 
 ### Implementation
-For Software:
-# Installation
-[commands]
+#### For Software:
+##### Installation
+```sh
+git clone [your repository link]
+cd college-advisor
+npm install
+```
 
-# Run
-[commands]
+##### Run
+```sh
+npm start
+```
 
-### Project Documentation
-For Software:
+## Project Documentation
+### Screenshots
+(https://drive.google.com/drive/folders/14ZxY1QClN3KKX9QvzNpLMOyq4oXq76NO?usp=drive_link)
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
-
-# Diagrams
+### Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Team](Add photo of your team here)
+*Shows how the user inputs flow into recommendations*
 
 
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
-### Project Demo
-# Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
-
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- **Aysha:** Frontend Development, UI/UX, Firebase Integration
+
 
 ---
 Made with ❤️ at TinkerHub
