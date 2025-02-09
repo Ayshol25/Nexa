@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Advisor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 500px;
+        }
+        select, button, input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 90%;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>College Advising System</h2>
+
+        <label for="interest">Select Interest:</label>
+        <select id="interest">
+            <option value="Engineering">Engineering</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Arts">Arts</option>
+            <option value="Science">Science</option>
+            <option value="Law">Law</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Military">Military</option>
+            <option value="Navy">Navy</option>
+            <option value="Airport">Airport</option>
+            <option value="Undecided">I'm Not Sure (Take Aptitude Test)</option>
+        </select>
+
+        <label for="location">Preferred Location:</label>
+        <select id="location" onchange="toggleInput('location')">
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <option value="Others">Others</option>
+        </select>
+        <input type="text" id="customLocation" placeholder="Enter your country" style="display: none;">
+
+        <label for="vibe">College Vibe:</label>
+        <select id="vibe" onchange="toggleInput('vibe')">
+            <option value="Tech-focused">Tech-focused</option>
+            <option value="Research-heavy">Research-heavy</option>
+            <option value="Creative">Creative</option>
+            <option value="Competitive">Competitive & Prestigious</option>
+            <option value="Laid-Back">Laid-Back & Chill</option>
+            <option value="Others">Others</option>
+        </select>
+        <input type="text" id="customVibe" placeholder="Enter your vibe" style="display: none;">
+
+        <button onclick="findColleges()">Submit</button>
+        <button onclick="startAptitudeTest()">Take Aptitude Test</button>
+
+        <h3>Recommended Colleges:</h3>
+        <ul id="result"></ul>
+    </div>
+
+    <script>
+        function toggleInput(type) {
+            const selectElement = document.getElementById(type);
+            const inputElement = document.getElementById(type === "location" ? "customLocation" : "customVibe");
+            
+            if (selectElement.value === "Others") {
+                inputElement.style.display = "inline-block";
+            } else {
+                inputElement.style.display = "none";
+            }
+        }
+
+        async function findColleges() {
+            const interest = document.getElementById("interest").value;
+            const location = document.getElementById("location").value === "Others" ? 
+                             document.getElementById("customLocation").value : 
+                             document.getElementById("location").value;
+            const vibe = document.getElementById("vibe").value === "Others" ? 
+                         document.getElementById("customVibe").value : 
+                         document.getElementById("vibe").value;
+
+            const response = await fetch('http://localhost:3000/get-colleges', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ interest, location, vibe })
+            });
+
+            const data = await response.json();
+            let resultHTML = `<strong>Based on your choices:</strong><br>Interest: ${data.interest}<br>Location: ${data.location}<br>Vibe: ${data.vibe}<br><br>`;
+
+            if (data.colleges.length > 0) {
+                resultHTML += "<strong>Suggested Colleges:</strong><ul>";
+                data.colleges.forEach(college => {
+                    resultHTML += `<li>${college} (${data.location})</li>`;
+                });
+                resultHTML += "</ul>";
+            } else {
+                resultHTML += "No matching colleges found.";
+            }
+
+            document.getElementById("result").innerHTML = resultHTML;
+        }
+
+        function startAptitudeTest() {
+            const answer = prompt("Do you prefer theory or practical subjects? (Enter: Theory / Practical)");
+            let suggestedCourse = "";
+
+            if (answer.toLowerCase() === "theory") {
+                suggestedCourse = "Science or Arts";
+            } else if (answer.toLowerCase() === "practical") {
+                suggestedCourse = "Engineering or Medicine";
+            } else {
+                suggestedCourse = "General Studies";
+            }
+
+            alert("Based on your answer, we suggest: " + suggestedCourse);
+            document.getElementById("interest").value = suggestedCourse;
+        }
+    </script>
+
+</body>
+</html>

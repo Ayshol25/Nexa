@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Advisor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 500px;
+        }
+        select, button, input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 90%;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden { display: none; }
+        #result { font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>College Advising System</h2>
+
+        <label for="interest">Select Interest:</label>
+        <select id="interest">
+            <option value="Engineering">Engineering</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Arts">Arts</option>
+            <option value="Science">Science</option>
+            <option value="Law">Law</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Military">Military</option>
+            <option value="Navy">Navy</option>
+            <option value="Airport">Airport</option>
+            <option value="Undecided">I'm Not Sure (Take Aptitude Test)</option>
+        </select>
+
+        <button onclick="startAptitudeTest()">Take Aptitude Test</button>
+
+        <div id="aptitudeTest" class="hidden">
+            <h3>Aptitude Test</h3>
+            <p id="question"></p>
+            <button onclick="answerQuestion('Engineering')">A: I love solving technical problems</button>
+            <button onclick="answerQuestion('Medicine')">B: I enjoy helping people and healthcare</button>
+            <button onclick="answerQuestion('Arts')">C: I prefer creative activities like painting</button>
+            <button onclick="answerQuestion('Science')">D: I love doing experiments and researching</button>
+            <button onclick="answerQuestion('Law')">E: I enjoy debating and understanding rules</button>
+        </div>
+
+        <h3 id="testResult"></h3>
+    </div>
+
+    <script>
+        let questions = [
+            "What type of activities do you enjoy?",
+            "Which subject do you prefer?",
+            "What kind of work excites you the most?",
+            "What is your favorite way to solve problems?",
+            "What career do you see yourself in?"
+        ];
+
+        let answers = { Engineering: 0, Medicine: 0, Arts: 0, Science: 0, Law: 0 };
+        let currentQuestion = 0;
+
+        function startAptitudeTest() {
+            document.getElementById("aptitudeTest").classList.remove("hidden");
+            document.getElementById("testResult").innerHTML = "";
+            currentQuestion = 0;
+            answers = { Engineering: 0, Medicine: 0, Arts: 0, Science: 0, Law: 0 };
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById("question").innerText = questions[currentQuestion];
+            } else {
+                calculateResult();
+            }
+        }
+
+        function answerQuestion(category) {
+            answers[category]++;
+            currentQuestion++;
+            showNextQuestion();
+        }
+
+        function calculateResult() {
+            let maxScore = Math.max(...Object.values(answers));
+            let recommendedCourses = Object.keys(answers).filter(key => answers[key] === maxScore);
+
+            if (recommendedCourses.length === 1) {
+                document.getElementById("testResult").innerText = "Recommended Course: " + recommendedCourses[0];
+                document.getElementById("interest").value = recommendedCourses[0];
+            } else {
+                document.getElementById("testResult").innerText = "Tie! Choose from: " + recommendedCourses.join(", ");
+            }
+        }
+    </script>
+
+</body>
+</html>

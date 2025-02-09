@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Advisor</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); display: inline-block; max-width: 500px; }
+        select, button, input { padding: 10px; margin: 10px; font-size: 16px; width: 90%; }
+        button { cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>College Advising System</h2>
+        <label for="location">Select Preferred Location:</label>
+        <select id="location" onchange="toggleCustomInput('location')">
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+            <option value="Germany">Germany</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="customLocation" class="hidden" placeholder="Enter your location">
+        
+        <label for="interest">Select Interest:</label>
+        <select id="interest">
+            <option value="Engineering">Engineering</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Law">Law</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Military">Military</option>
+            <option value="Navy">Navy</option>
+            <option value="Airport">Airport</option>
+        </select>
+        
+        <label for="vibe">Select Vibe:</label>
+        <select id="vibe" onchange="toggleCustomInput('vibe')">
+            <option value="Modern">Modern</option>
+            <option value="Traditional">Traditional</option>
+            <option value="Party">Party Culture</option>
+            <option value="Nature">Nature Surrounded</option>
+            <option value="Calm">Calm and Peaceful</option>
+            <option value="Tech-Savvy">Tech-Savvy Environment</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="customVibe" class="hidden" placeholder="Enter your preferred vibe">
+        
+        <button onclick="findColleges()">Find Colleges</button>
+        <h3>Recommended Colleges:</h3>
+        <ul id="collegeList"></ul>
+    </div>
+
+    <script>
+        function toggleCustomInput(type) {
+            let selectElement = document.getElementById(type);
+            let customInput = document.getElementById("custom" + type.charAt(0).toUpperCase() + type.slice(1));
+            customInput.classList.toggle("hidden", selectElement.value !== "Other");
+        }
+        
+        function findColleges() {
+            let location = document.getElementById("location").value;
+            let interest = document.getElementById("interest").value;
+            let vibe = document.getElementById("vibe").value;
+            if (location === "Other") location = document.getElementById("customLocation").value || "Unknown";
+            if (vibe === "Other") vibe = document.getElementById("customVibe").value || "Any";
+            
+            let colleges = {
+                "India": { "Engineering": ["IIT Bombay", "IIT Delhi"], "Medicine": ["AIIMS Delhi"], "Law": ["NLSIU Bangalore"], "Agriculture": ["Punjab Agricultural University"], "Military": ["National Defence Academy"], "Navy": ["Indian Naval Academy"], "Airport": ["Indira Gandhi Institute of Aeronautics"] },
+                "USA": { "Engineering": ["MIT", "Stanford"], "Medicine": ["Harvard Medical"], "Law": ["Yale Law School"], "Agriculture": ["Cornell University"], "Military": ["United States Military Academy"], "Navy": ["United States Naval Academy"], "Airport": ["Embry-Riddle Aeronautical University"] },
+                "Canada": { "Engineering": ["University of Toronto", "UBC"], "Medicine": ["McGill Medical"], "Law": ["University of Toronto Law"], "Agriculture": ["University of Guelph"], "Military": ["Royal Military College of Canada"], "Navy": ["Canadian Forces Naval Academy"], "Airport": ["Seneca College Aviation"] },
+                "UK": { "Engineering": ["Oxford", "Cambridge"], "Medicine": ["UCL Medical"], "Law": ["King's College London"], "Agriculture": ["University of Reading"], "Military": ["Royal Military Academy Sandhurst"], "Navy": ["Britannia Royal Naval College"], "Airport": ["Cranfield University Aviation"] },
+                "Australia": { "Engineering": ["University of Melbourne", "UNSW Sydney"], "Medicine": ["University of Sydney Medical"], "Law": ["University of Melbourne Law"], "Agriculture": ["University of Queensland"], "Military": ["Australian Defence Force Academy"], "Navy": ["Royal Australian Naval College"], "Airport": ["Griffith Aviation"] },
+                "Germany": { "Engineering": ["TU Munich", "RWTH Aachen"], "Medicine": ["Heidelberg University Medical"], "Law": ["Humboldt University Law"], "Agriculture": ["University of Hohenheim"], "Military": ["Bundeswehr University Munich"], "Navy": ["German Naval Academy"], "Airport": ["FH Aachen Aviation"] }
+            };
+            
+            let collegeList = document.getElementById("collegeList");
+            collegeList.innerHTML = "";
+            let matchedColleges = colleges[location]?.[interest] || ["No colleges found."];
+            matchedColleges.forEach(college => {
+                let li = document.createElement("li");
+                li.innerText = college;
+                collegeList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

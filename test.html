@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Advisor Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="container" id="login-container">
+        <h2>Login to College Advisor</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Home Page -->
+    <div class="container hidden" id="home-container">
+        <h2>Welcome to the College Advisor Website!</h2>
+        <p>You have successfully logged in.</p>
+    </div>
+
+    <script>
+        // Simple login validation (in real case, use Firebase here)
+        const loginForm = document.getElementById("login-form");
+        const loginContainer = document.getElementById("login-container");
+        const homeContainer = document.getElementById("home-container");
+
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the page from reloading
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            
+        });
+    </script>
+</body>
+</html>

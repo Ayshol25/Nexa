@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Advisor - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            font-size: 14px;
+            color: #333;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .input-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .forgot-password {
+            text-align: center;
+            font-size: 14px;
+        }
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Login - College Advisor</h2>
+    
+    <!-- Error message for invalid login -->
+    <div id="error-message" class="error" style="display: none;"></div>
+
+    <form action="#" method="POST" id="login-form">
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+
+        <button type="submit" class="submit-btn">Login</button>
+    </form>
+
+    <div class="forgot-password">
+        <p>Forgot your password? <a href="#" id="forgot-password-link">Click here</a></p>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgot-password-modal" style="display:none; padding: 20px; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 400px; margin: 100px auto;">
+    <h3>Reset Your Password</h3>
+    <div class="input-group">
+        <label for="recovery-email-phone">Enter Email or Phone Number</label>
+        <input type="text" id="recovery-email-phone" name="recovery-email-phone" required placeholder="Enter your email or phone number">
+    </div>
+    <button onclick="resetPassword()" class="submit-btn">Submit</button>
+    <button onclick="closeModal()" style="background-color: #ccc; margin-top: 10px;" class="submit-btn">Close</button>
+</div>
+
+<script>
+    // Show forgot password modal
+    document.getElementById("forgot-password-link").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("forgot-password-modal").style.display = "block";
+    });
+
+    // Close forgot password modal
+    function closeModal() {
+        document.getElementById("forgot-password-modal").style.display = "none";
+    }
+
+    // Password recovery action (simulated)
+    function resetPassword() {
+        const recoveryInput = document.getElementById("recovery-email-phone").value;
+        alert("Password recovery instructions sent to: " + recoveryInput);
+        closeModal();
+    }
+
+    // Form submission logic (simulated login action)
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simulated validation (here you can add actual backend validation)
+        if (email && password) {
+            // Success action, redirect or load next page (simulated)
+            alert("Welcome, " + email);
+            // window.location.href = "dashboard.html"; // Redirect to another page
+        } else {
+            // Show error message if validation fails
+            document.getElementById("error-message").style.display = "block";
+            document.getElementById("error-message").textContent = "Please fill out both fields.";
+        }
+    });
+</script>
+
+</body>
+</html>
